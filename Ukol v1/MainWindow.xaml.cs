@@ -12,10 +12,38 @@ namespace Ukol_v1
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        public class FileDialogService : IFileDialogService
+        {
+            public string? OpenFile(string filter, string title)
+            {
+                OpenFileDialog openFileDialog = new()
+                {
+                    Filter = filter,
+                    Title = title
+                };
+
+                return openFileDialog.ShowDialog() == true ? openFileDialog.FileName : null;
+            }
+        }
+
+        public class MessageBoxService : IMessageBoxService
+        {
+            public void Show(string message)
+            {
+                MessageBox.Show(message);
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+
+            // Přidejte reálné implementace služeb
+            var fileDialogService = new FileDialogService();
+            var messageBoxService = new MessageBoxService();
+
+            this.DataContext = new MainViewModel(fileDialogService, messageBoxService);
         }
     }
 }
