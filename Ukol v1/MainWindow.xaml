@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Title="Autíčkář" Height="400" Width="600">
     <DockPanel>
-        <Button Content="Načti auta" Click="LoadXmlFile_Click" DockPanel.Dock="Top" Margin="5"/>
-        <DataGrid AutoGenerateColumns="False" Margin="5" Name="AutoDataGrid">
+        <Button Content="Načti auta" Command="{Binding LoadXmlCommand}" DockPanel.Dock="Top" Margin="5"/>
+        <DataGrid AutoGenerateColumns="False"
+          Margin="5"
+          ItemsSource="{Binding AutoSummaries}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.Header>
